@@ -1,5 +1,37 @@
 package com.bikkadIT.PhoneBookApplication.service;
 
-public class PhoneServiceIMPL {
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.bikkadIT.PhoneBookApplication.Repository.PhoneRepository;
+import com.bikkadIT.PhoneBookApplication.entity.Contact;
+@Service
+public class PhoneServiceIMPL implements PhoneServiceI{
+	@Autowired
+	private PhoneRepository phoneRepository;
+
+	@Override
+	public boolean saveContact(Contact contact) {
+		Contact save = phoneRepository.save(contact);
+		if(save!= null) {
+			System.out.println("contact save sucessfully");
+			return true;
+		}else {
+			System.out.println("contact not save sucessfully");
+			return false;
+		}
+		
+	}
+
+	@Override
+	public List<Contact> getAllContact() {
+		List<Contact> contact = phoneRepository.findAll();
+		if(contact!=null) {
+			return contact;
+		}else
+		return null;
+	}
 
 }

@@ -3,24 +3,30 @@ package com.bikkadIT.PhoneBookApplication.entity;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 @Entity
 @Table(name="CONTACT_DTLS")
 public class Contact {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-
 	private Integer contactId;
 	private String contactName;
 	private String contactNumber;
 	private String contactEmail;
 	private Character activeSwitch;
+	@CreationTimestamp
 	private LocalDate createdDate;
+	@Column(name="UPDATED_DATE")
+	@UpdateTimestamp
 	private LocalDate  updateDate;
 	public Integer getContactId() {
 		return contactId;
