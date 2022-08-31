@@ -1,6 +1,7 @@
 package com.bikkadIT.PhoneBookApplication.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,4 +35,34 @@ public class PhoneServiceIMPL implements PhoneServiceI{
 		return null;
 	}
 
+	@Override
+	public Contact getContactbyID(Integer contactId) {
+		Optional<Contact> findbyid = phoneRepository.findById(contactId)	;
+		if(findbyid.isPresent()) {
+			Contact contact = findbyid.get();
+			return contact;
+			
+		}
+		return null;
+	}
+
+	@Override
+	public Contact updateContactbyid(Contact contact) {
+		Contact save2 = phoneRepository.save(contact)		;
+		return save2;
+		
+
+
 }
+
+	@Override
+	public boolean deletContactbyID(Integer contactID) {
+		Optional<Contact> id = phoneRepository.findById(contactID);	
+		if(id.isPresent())
+		{
+			phoneRepository.deleteById(contactID);
+			return true;
+			
+		}else {
+		return false;
+	}}}
